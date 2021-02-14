@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "904857611281",
+    "firebase_url": "https://erospharmacy-ec8ce-default-rtdb.firebaseio.com",
+    "project_id": "erospharmacy-ec8ce",
+    "storage_bucket": "erospharmacy-ec8ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904857611281:android:965141cce038c14416d5b0",
+        "android_client_info": {
+          "package_name": "com.erospharmacy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904857611281-1pr996e4qrjgqnbucnder2s52nj4eob6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg2MFg5I7I9OGF5OZ1hNLKa_bxqGXidJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904857611281-1pr996e4qrjgqnbucnder2s52nj4eob6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
