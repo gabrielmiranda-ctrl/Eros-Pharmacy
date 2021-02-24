@@ -44,6 +44,7 @@ import {
 import Icon1 from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import Icon4 from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../styled/colors';
 import { ScrollView } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -355,7 +356,7 @@ export default function Profile({ navigation }) {
           >
             <ModalView>
               <Row>
-                <Icon3 name='error-outline' color={colors.red} size={22} style={{ paddingRight: 5 }} />
+                <Icon4 name='error-outline' color={colors.red} size={22} style={{ paddingRight: 5 }} />
                 <ModalTitleError>Ops!</ModalTitleError>
               </Row>
               <ModalSubtitle>Ocorreu um erro ao excluir paciente.</ModalSubtitle>
