@@ -13,9 +13,16 @@ export const Header = styled.View`
   justify-content: center;
 `;
 
-export const Flex = styled.View`
+export const Back = styled.TouchableOpacity`
+  width: 55%;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: row;
+`;
+
+export const BackText = styled.Text`
+  color: ${colors.gray};
+  font-size: ${metrics.regular};
 `;
 
 export const HeaderText = styled.Text`
@@ -31,8 +38,8 @@ export const UserPhoto = styled.View`
 `;
 
 export const Avatar = styled.Image`
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   border-radius: 100px;
 `;
 
@@ -42,21 +49,24 @@ export const Centralize = styled.View`
   justify-content: center;
 `;
 
-export const Edit = styled.View`
+export const Edit = styled.TouchableOpacity`
   background-color: ${colors.black};
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 100px;
   justify-content: center;
   align-items: center;
-  margin-left: -5%;
+  margin-top: -120px;
+  margin-left: 180px;
 `;
 
 export const NameText = styled.Text`
+  margin-top: 50px;
   color: ${colors.black};
   font-size: ${metrics.big};
   text-align: center;
   justify-content: center;
+  align-items: center;
   font-weight: bold;
   margin-bottom: 20px;
 `;
@@ -90,38 +100,28 @@ export const TextControl = styled.View`
   padding-top: 15px;
 `;
 
+export const Button = styled.View`
+  flex-direction: row;
+`;
 export const BtnEdit = styled.TouchableOpacity`
   background-color: ${colors.green};
-  width: 85%;
-  height: 45px;
-  border-radius: 50px;
+  width: 50px;
+  margin-right: 20px;
+  height: 50px;
+  border-radius: 5px;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   margin-bottom: 30px;
-`;
-
-export const TextBtnEdit = styled.Text`
-  color: ${colors.white};
-  font-size: ${metrics.medium};
-  padding-right: 8px;
 `;
 
 export const BtnDelete = styled.TouchableOpacity`
   background-color: ${colors.red};
-  width: 85%;
-  height: 45px;
-  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   margin-bottom: 30px;
-`;
-
-export const TextBtnDelete = styled.Text`
-  color: ${colors.white};
-  font-size: ${metrics.medium};
-  padding-right: 8px;
 `;
 
 export const HeaderInfo = styled.View`
@@ -186,19 +186,89 @@ export const KinshipValue = styled.Text`
   padding: 10px;
 `;
 
+export const ModalView = styled.View`
+  background-color: ${colors.white};
+  border-radius: 10px;
+  padding: 4%;
+`;
 
+export const ModalTitle = styled.Text`
+  color: ${colors.yellow};
+  font-size: ${metrics.medium};
+`;
 
+export const ModalSubtitle = styled.Text`
+  color: ${colors.black};
+  font-size: ${metrics.regular};
+  padding-top: 3%;
+  padding-bottom: 13%;
+`;
 
+export const Buttons = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+`;
 
+export const ModalButtonOk = styled.TouchableOpacity`
+  background-color: ${colors.yellow};
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-left: 4%;
+`;
 
+export const ModalButtonCancel = styled.TouchableOpacity`
+  background-color: ${colors.red};
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+`;
 
+export const ButtonTextOk = styled.Text`
+  color: ${colors.white};
+  font-size: ${metrics.regular};
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
+`;
 
+export const ButtonTextCancel = styled.Text`
+  color: ${colors.white};
+  font-size: ${metrics.regular};
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
+`;
 
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
 
+export const ModalButtonSuccess = styled.TouchableOpacity`
+  background-color: ${colors.green};
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-left: 4%;
+`;
 
+export const ModalTitleSuccess = styled.Text`
+  color: ${colors.green};
+  font-size: ${metrics.medium};
+`;
 
+export const ModalButtonError = styled.TouchableOpacity`
+  background-color: ${colors.red};
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-left: 4%;
+`;
 
-
-
-
-
+export const ModalTitleError = styled.Text`
+  color: ${colors.red};
+  font-size: ${metrics.medium};
+`;
