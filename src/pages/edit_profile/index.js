@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, TextInput, LogBox } from 'react-native';
+import { ScrollView, TextInput } from 'react-native';
 import {
   Container,
   Content,
@@ -30,6 +30,7 @@ import { TextInputMask } from 'react-native-masked-text';
 import RNModal from 'react-native-modal';
 
 export default function EditProfile({ navigation }) {
+
   const [birthDate, setBirthDate] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -42,14 +43,15 @@ export default function EditProfile({ navigation }) {
   const [modalVisible3, setModalVisible3] = useState(false);
 
   useEffect(() => {
-    firestore().collection('patients').doc('teste').onSnapshot(documentSnapshot => {
-      setBirthDate(documentSnapshot.data().birthDate)
-      setFirstName(documentSnapshot.data().firstName)
-      setLastName(documentSnapshot.data().lastName)
-      setCPF(documentSnapshot.data().cpf)
-      setRG(documentSnapshot.data().rg)
-      setNotes(documentSnapshot.data().notes)
-    })
+    firestore().collection('patients').doc('teste').get()
+      .then(documentSnapshot => {
+        setBirthDate(documentSnapshot.data().birthDate)
+        setFirstName(documentSnapshot.data().firstName)
+        setLastName(documentSnapshot.data().lastName)
+        setCPF(documentSnapshot.data().cpf)
+        setRG(documentSnapshot.data().rg)
+        setNotes(documentSnapshot.data().notes)
+      })
   }, [])
 
   function updateProfile(birthDate, firstName, lastName, cpf, rg, notes) {
@@ -97,8 +99,6 @@ export default function EditProfile({ navigation }) {
         });
     }
   }
-
-  LogBox.ignoreAllLogs();
 
   return (
     <Container>
@@ -207,8 +207,8 @@ export default function EditProfile({ navigation }) {
               </Row>
               <ModalSubtitle>Os campos devem ser preenchidos.</ModalSubtitle>
               <Buttons>
-                <OkButton>
-                  <OkButtonText onPress={() => setModalVisible1(false)}>Ok</OkButtonText>
+                <OkButton onPress={() => setModalVisible1(false)}>
+                  <OkButtonText>Ok</OkButtonText>
                 </OkButton>
               </Buttons>
             </ModalView>
@@ -226,8 +226,8 @@ export default function EditProfile({ navigation }) {
               </Row>
               <ModalSubtitle>Ocorreu um erro ao atualizar os dados.</ModalSubtitle>
               <Buttons>
-                <OkButton>
-                  <OkButtonText onPress={() => setModalVisible2(false)}>Ok</OkButtonText>
+                <OkButton onPress={() => setModalVisible2(false)}>
+                  <OkButtonText>Ok</OkButtonText>
                 </OkButton>
               </Buttons>
             </ModalView>
@@ -245,8 +245,8 @@ export default function EditProfile({ navigation }) {
               </Row>
               <ModalSubtitle>Os dados foram atualizados.</ModalSubtitle>
               <Buttons>
-                <OkButtonSuccess>
-                  <OkButtonText onPress={() => setModalVisible3(false)}>Ok</OkButtonText>
+                <OkButtonSuccess onPress={() => setModalVisible3(false)}>
+                  <OkButtonText>Ok</OkButtonText>
                 </OkButtonSuccess>
               </Buttons>
             </ModalView>

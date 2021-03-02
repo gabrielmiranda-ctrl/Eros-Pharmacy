@@ -35,7 +35,7 @@ import Icon2 from 'react-native-vector-icons/Feather';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import Icon4 from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../styled/colors';
-import { ScrollView, LogBox } from 'react-native';
+import { ScrollView } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import RNModal from 'react-native-modal';
 
@@ -53,18 +53,18 @@ export default function Profile({ navigation }) {
   const [modalVisible3, setModalVisible3] = useState(false);
 
   useEffect(() => {
-    firestore().collection('patients').doc('teste').onSnapshot(documentSnapshot => {
-      setBirthDate(documentSnapshot.data().birthDate)
-      setFirstName(documentSnapshot.data().firstName)
-      setLastName(documentSnapshot.data().lastName)
-      setCPF(documentSnapshot.data().cpf)
-      setRG(documentSnapshot.data().rg)
-      setNotes(documentSnapshot.data().notes)
-    })
+    firestore().collection('patients').doc('teste').get()
+      .then(documentSnapshot => {
+        setBirthDate(documentSnapshot.data().birthDate)
+        setFirstName(documentSnapshot.data().firstName)
+        setLastName(documentSnapshot.data().lastName)
+        setCPF(documentSnapshot.data().cpf)
+        setRG(documentSnapshot.data().rg)
+        setNotes(documentSnapshot.data().notes)
+      })
   }, [])
 
   var name = firstName + ' ' + lastName;
-  LogBox.ignoreAllLogs();
 
   function userDelete() {
     setModalVisible1(false);
@@ -162,9 +162,7 @@ export default function Profile({ navigation }) {
                 <ModalButtonCancel onPress={() => setModalVisible1(false)}>
                   <ButtonTextCancel>Cancelar</ButtonTextCancel>
                 </ModalButtonCancel>
-                <ModalButtonOk
-                  onPress={() => userDelete()}
-                >
+                <ModalButtonOk onPress={() => userDelete()}>
                   <ButtonTextOk>Ok</ButtonTextOk>
                 </ModalButtonOk>
               </Buttons>
@@ -183,9 +181,7 @@ export default function Profile({ navigation }) {
               </Row>
               <ModalSubtitle>O paciente foi excluído.</ModalSubtitle>
               <Buttons>
-                <ModalButtonSuccess
-                  onPress={() => navigation.navigate('Route')}
-                >
+                <ModalButtonSuccess onPress={() => navigation.navigate('Route')}>
                   <ButtonTextOk>Ok</ButtonTextOk>
                 </ModalButtonSuccess>
               </Buttons>
@@ -204,9 +200,7 @@ export default function Profile({ navigation }) {
               </Row>
               <ModalSubtitle>Ocorreu um erro ao excluir paciente.</ModalSubtitle>
               <Buttons>
-                <ModalButtonError
-                  onPress={() => setModalVisible3(false)}
-                >
+                <ModalButtonError onPress={() => setModalVisible3(false)} >
                   <ButtonTextOk>Ok</ButtonTextOk>
                 </ModalButtonError>
               </Buttons>

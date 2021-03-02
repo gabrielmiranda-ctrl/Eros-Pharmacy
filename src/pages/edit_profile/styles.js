@@ -43,7 +43,7 @@ export const Content = styled.View`
 
 export const FieldSet = styled.View`
   width: 90%;
-  margin: 30px 0 20px 0;
+  margin: 30px 0 20px;
   border-radius: 2px;
   border-color: ${colors.green};
   border-width: 2px;
@@ -88,7 +88,7 @@ export const ModalTitleSuccess = styled.Text`
 export const ModalSubtitle = styled.Text`
   color: ${colors.black};
   font-size: ${metrics.regular};
-  padding: 3% 0 13% 0;
+  padding: 3% 0 13%;
 `;
 
 export const Buttons = styled.View`

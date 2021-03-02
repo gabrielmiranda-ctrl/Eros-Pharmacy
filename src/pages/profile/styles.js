@@ -55,7 +55,7 @@ export const Name = styled.Text`
   color: ${colors.black};
   font-size: ${metrics.medium};
   font-weight: bold;
-  padding: 0 10% 10% 10%;
+  padding: 0 10% 10%;
   text-align: center;
 `;
 
@@ -110,7 +110,7 @@ export const ModalTitle = styled.Text`
 export const ModalSubtitle = styled.Text`
   color: ${colors.black};
   font-size: ${metrics.regular};
-  padding: 3% 0 13% 0;
+  padding: 3% 0 13%;
 `;
 
 export const Buttons = styled.View`
