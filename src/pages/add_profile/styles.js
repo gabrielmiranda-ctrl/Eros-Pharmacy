@@ -26,7 +26,7 @@ export const BackText = styled.Text`
   font-size: ${metrics.regular};
 `;
 
-export const Update = styled.TouchableOpacity``;
+export const Add = styled.TouchableOpacity``;
 
 export const Input = styled.TextInput``;
 

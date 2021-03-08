@@ -8,6 +8,8 @@ import Home from './src/pages/home'
 import Initial from './src/pages/initial'
 import Profile from './src/pages/profile'
 import EditProfile from './src/pages/edit_profile'
+import AddProfile from './src/pages/add_profile'
+import PatientsList from './src/pages/patients_list'
 
 const Stack = createStackNavigator()
 
@@ -36,6 +38,16 @@ export default function App () {
         <Stack.Screen 
           name='EditProfile'
           component={EditProfile}
+          options={{headerShown: false}} 
+        />
+        <Stack.Screen 
+          name='AddProfile'
+          component={AddProfile}
+          options={{headerShown: false}} 
+        />
+        <Stack.Screen 
+          name='PatientsList'
+          component={PatientsList}
           options={{headerShown: false}} 
         />
       </Stack.Navigator>

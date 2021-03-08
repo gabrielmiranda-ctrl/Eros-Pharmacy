@@ -1,10 +1,18 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import colors from '../../styled/colors';
 import metrics from '../../styled/metrics';
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${colors.lightGray};
+`;
+
+export const Main = styled.View`
+  flex: 1;
+  background-color: ${colors.lightGray};
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Header = styled.View`
@@ -175,3 +183,9 @@ export const ModalTitleError = styled.Text`
   color: ${colors.red};
   font-size: ${metrics.medium};
 `;
+
+export const styles = StyleSheet.create({
+  modalIcon: {
+    paddingRight: 5
+  },
+});

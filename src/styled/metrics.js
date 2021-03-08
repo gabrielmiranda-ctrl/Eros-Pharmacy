@@ -4,4 +4,5 @@ export default {
   medium: '18px',
   regular: '16px',
   small: '14px',
+  tiny: '12px',
 }

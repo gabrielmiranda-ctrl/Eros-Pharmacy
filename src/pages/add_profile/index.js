@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import {
@@ -8,7 +8,7 @@ import {
   Back,
   BackText,
   Icons,
-  Update,
+  Add,
   ModalTitle,
   ModalSubtitle,
   ModalView,
@@ -29,31 +29,23 @@ import { TextInputMask } from 'react-native-masked-text';
 import RNModal from 'react-native-modal';
 import { styles } from './styles';
 
-export default function EditProfile({ navigation, route }) {
+export default function AddProfile({ navigation }) {
 
+  const [id, setID] = useState(null);
   const [birthDate, setBirthDate] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [cpf, setCPF] = useState('');
   const [rg, setRG] = useState('');
   const [notes, setNotes] = useState('');
+
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
   const [modalVisible4, setModalVisible4] = useState(false);
 
-  // Obtém os dados vindos da Profile.
-  useEffect(() => {
-    setBirthDate(route.params?.birthDate);
-    setFirstName(route.params?.firstName);
-    setLastName(route.params?.lastName);
-    setCPF(route.params?.cpf);
-    setRG(route.params?.rg);
-    setNotes(route.params?.notes);
-  }, [])
-
   // Função que verifica se os campos foram preenchidos corretamente.
-  function updateProfile(birthDate, firstName, lastName, cpf, rg, notes) {
+  function addProfile(birthDate, firstName, lastName, cpf, rg, notes) {
     if (
       (!birthDate || birthDate.replace(/\s/g, "") === "")
       ||
@@ -70,6 +62,15 @@ export default function EditProfile({ navigation, route }) {
       setModalVisible4(true);
     }
     else {
+      // Criar ID do paciente.
+      var length = 20;
+      var id = '';
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        id += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
       // Máscara do nome do paciente.
       firstName = firstName.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
         return a.toUpperCase();
@@ -84,15 +85,16 @@ export default function EditProfile({ navigation, route }) {
       const normalizeLastName = lastName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
       const maskLastName = normalizeLastName.replace(/[&\/\\#,@0123456789+()$~%.'":*?<>{}]/g, '');
 
-      // Função que atualiza os dados do paciente no Firestore.
-      firestore().collection('patients').doc('ATiPdBCapQhkPpSJOpQ9').update({
+      // Função que cria novos pacientes no Firestore.
+      firestore().collection('patients').doc(id).set({
+        id: id,
         birthDate: birthDate,
         firstName: maskFirstName,
         lastName: maskLastName,
         cpf: cpf,
         rg: rg,
         notes: notes,
-        uploadedAt: new Date(),
+        createdAt: new Date(),
       })
         .then(() => {
           setModalVisible3(true);
@@ -113,9 +115,9 @@ export default function EditProfile({ navigation, route }) {
         </Back>
 
         <Icons>
-          <Update onPress={() => updateProfile(birthDate, firstName, lastName, cpf, rg, notes)}>
+          <Add onPress={() => addProfile(birthDate, firstName, lastName, cpf, rg, notes)}>
             <Icon2 name="check" size={28} color={colors.gray} />
-          </Update>
+          </Add>
         </Icons>
       </Header>
 
@@ -247,7 +249,7 @@ export default function EditProfile({ navigation, route }) {
                 <Icon3 name='error-outline' color={colors.red} size={22} style={styles.modalIcon} />
                 <ModalTitle>Ops!</ModalTitle>
               </Row>
-              <ModalSubtitle>Ocorreu um erro ao atualizar os dados.</ModalSubtitle>
+              <ModalSubtitle>Ocorreu um erro ao adicionar paciente.</ModalSubtitle>
               <Buttons>
                 <OkButton onPress={() => setModalVisible2(false)}>
                   <OkButtonText>Ok</OkButtonText>
@@ -266,7 +268,7 @@ export default function EditProfile({ navigation, route }) {
                 <Icon2 name='check' color={colors.green} size={22} style={styles.modalIcon} />
                 <ModalTitleSuccess>Sucesso!</ModalTitleSuccess>
               </Row>
-              <ModalSubtitle>Os dados foram atualizados.</ModalSubtitle>
+              <ModalSubtitle>O paciente foi adicionado.</ModalSubtitle>
               <Buttons>
                 <OkButtonSuccess onPress={() => setModalVisible3(false)}>
                   <OkButtonText>Ok</OkButtonText>
