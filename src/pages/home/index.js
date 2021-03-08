@@ -22,6 +22,7 @@ import {
   BackText,
   ClassMedicine,
   TextClass,
+  MedicineScroll,
 } from './styles'
 import colors from '../../styled/colors'
 import firestore from '@react-native-firebase/firestore'
@@ -66,32 +67,36 @@ export default function Home ({navigation}) {
           <Icon name='person-outline' size={28} color={colors.gray} />
         </Profile>
       </Header>
-
-      <CScrollView>
-        {filterMedicine.map((item, key) => {
-          return (
-            <ViewMedicine key={key}>
-              <ClassMedicine>
-                <TextClass>{item.classe}</TextClass>
-              </ClassMedicine>
-              <ImgMedice>
-                <Img source={require('../../../assets/img/medicine.jpg')} />
-              </ImgMedice>
-              <TextMedicine>
-                <NameMedicine>
-                  <Text>{item.name}</Text>
-                </NameMedicine>
-                <DescriptionMedicine>
-                  <Text>{item.description}</Text>
-                </DescriptionMedicine>
-                <AmountMedicine>
-                  <Text>{item.amount}</Text>
-                </AmountMedicine>
-              </TextMedicine>
-            </ViewMedicine>
-          )
-        })}
-      </CScrollView>
+      <MedicineScroll>
+        <CScrollView>
+          {filterMedicine.map((item, key) => {
+            return (
+              <ViewMedicine key={key}>
+                <ClassMedicine>
+                  <TextClass>{item.classe}</TextClass>
+                </ClassMedicine>
+                <ImgMedice>
+                  <Img source={require('../../../assets/img/medicine.jpg')} />
+                </ImgMedice>
+                <TextMedicine>
+                  <NameMedicine>
+                    <Text>{item.name}</Text>
+                  </NameMedicine>
+                  <DescriptionMedicine>
+                    <Text>{item.description}</Text>
+                  </DescriptionMedicine>
+                  <AmountMedicine>
+                    <Text>quant: {item.amount}</Text>
+                  </AmountMedicine>
+                  <AmountMedicine>
+                    <Text>{item.dosage} {item.measure}</Text>
+                  </AmountMedicine>
+                </TextMedicine>
+              </ViewMedicine>
+            )
+          })}
+        </CScrollView>
+      </MedicineScroll>
       <SearchBar>
         <CInput>
           <Icon name='md-search-outline' size={28} color={colors.white} />

@@ -10,7 +10,7 @@ export const Container = styled.View`
 export const ViewModal = styled.View`
   background: ${colors.white};
   width: 70%;
-`;
+`
 export const Header = styled.View`
   padding: 0 20px;
   background: #fff;
@@ -48,13 +48,15 @@ export const Profile = styled.View`
   width: 15%;
 `
 
-export const CScrollView = styled.ScrollView`
+export const CScrollView = styled.ScrollView``
+
+export const MedicineScroll = styled.View`
   z-index: 999;
-  padding: 5px 0;
+  padding: 5px 0 25px 0;
   background: #ebf2fa;
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
 `
 
 export const ViewMedicine = styled.TouchableOpacity`
@@ -79,7 +81,8 @@ export const Img = styled.Image`
 
 export const TextMedicine = styled.View`
   justify-content: center;
-  padding: 0 20px;
+  width: 70%;
+  padding: 25px 20px 10px 20px;
 `
 export const ClassMedicine = styled.View`
   position: absolute;
@@ -103,6 +106,7 @@ export const NameMedicine = styled.Text`
 
 export const DescriptionMedicine = styled.Text`
   font-size: ${metrics.regular};
+  text-align: justify;
   padding: 0 0 2px 0;
   color: ${colors.gray};
 `

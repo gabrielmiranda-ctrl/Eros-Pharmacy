@@ -37,6 +37,11 @@ export default function App () {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name='EditProfile'
+          component={EditProfile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name='CreateMedicine'
           component={CreateMedicine}
           options={{headerShown: false}}

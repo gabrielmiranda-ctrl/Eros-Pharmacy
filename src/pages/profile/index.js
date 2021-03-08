@@ -90,7 +90,7 @@ export default function Profile({ navigation }) {
   // Função de deletar dados no Firestore.
   function userDelete() {
     setModalVisible1(false);
-    firestore().collection('patients').doc('teste').delete()
+    firestore().collection('patients').doc('ATiPdBCapQhkPpSJOpQ9').delete()
       .then(() => {
         setModalVisible2(true);
       }).catch((error) => {

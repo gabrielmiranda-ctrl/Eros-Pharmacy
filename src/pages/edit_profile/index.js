@@ -73,7 +73,7 @@ export default function EditProfile({ navigation, route }) {
       // Máscara do nome do paciente.
       firstName = firstName.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
         return a.toUpperCase();
-      });
+      })
       const normalizeFirstName = firstName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
       const maskFirstName = normalizeFirstName.replace(/[&\/\\#,@0123456789+()$~%.'":*?<>{}]/g, '');
 
@@ -96,16 +96,16 @@ export default function EditProfile({ navigation, route }) {
       })
         .then(() => {
           setModalVisible3(true);
-        }).catch((error) => {
+        })
+        .catch(error => {
           setModalVisible2(true);
           console.log(error);
-        });
+        })
     }
   }
 
   return (
     <Container>
-
       <Header>
         <Back onPress={() => navigation.goBack()}>
           <Icon1 name='chevron-back-outline' color={colors.gray} size={28} />
@@ -114,7 +114,7 @@ export default function EditProfile({ navigation, route }) {
 
         <Icons>
           <Update onPress={() => updateProfile(birthDate, firstName, lastName, cpf, rg, notes)}>
-            <Icon2 name="check" size={28} color={colors.gray} />
+            <Icon2 name='check' size={28} color={colors.gray} />
           </Update>
         </Icons>
       </Header>
@@ -221,8 +221,7 @@ export default function EditProfile({ navigation, route }) {
           <RNModal
             isVisible={modalVisible1}
             animationIn='zoomIn'
-            animationOut='zoomOut'
-          >
+            animationOut='zoomOut'>
             <ModalView>
               <Row>
                 <Icon3 name='error-outline' color={colors.red} size={22} style={styles.modalIcon} />
@@ -240,14 +239,15 @@ export default function EditProfile({ navigation, route }) {
           <RNModal
             isVisible={modalVisible2}
             animationIn='zoomIn'
-            animationOut='zoomOut'
-          >
+            animationOut='zoomOut'>
             <ModalView>
               <Row>
                 <Icon3 name='error-outline' color={colors.red} size={22} style={styles.modalIcon} />
                 <ModalTitle>Ops!</ModalTitle>
               </Row>
-              <ModalSubtitle>Ocorreu um erro ao atualizar os dados.</ModalSubtitle>
+              <ModalSubtitle>
+                Ocorreu um erro ao atualizar os dados.
+              </ModalSubtitle>
               <Buttons>
                 <OkButton onPress={() => setModalVisible2(false)}>
                   <OkButtonText>Ok</OkButtonText>
@@ -259,8 +259,7 @@ export default function EditProfile({ navigation, route }) {
           <RNModal
             isVisible={modalVisible3}
             animationIn='zoomIn'
-            animationOut='zoomOut'
-          >
+            animationOut='zoomOut'>
             <ModalView>
               <Row>
                 <Icon2 name='check' color={colors.green} size={22} style={styles.modalIcon} />
@@ -273,7 +272,7 @@ export default function EditProfile({ navigation, route }) {
                 </OkButtonSuccess>
               </Buttons>
             </ModalView>
-          </RNModal>
+          </RNModal >
 
           <RNModal
             isVisible={modalVisible4}
@@ -294,8 +293,8 @@ export default function EditProfile({ navigation, route }) {
             </ModalView>
           </RNModal>
 
-        </Content>
-      </ScrollView>
+        </Content >
+      </ScrollView >
     </Container >
-  );
+  )
 }
