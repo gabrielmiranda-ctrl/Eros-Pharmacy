@@ -9,6 +9,7 @@ import Initial from './src/pages/initial'
 import Profile from './src/pages/profile'
 import EditProfile from './src/pages/edit_profile'
 import CreateMedicine from './src/pages/createMedicine'
+
 const Stack = createStackNavigator()
 
 export default function App () {

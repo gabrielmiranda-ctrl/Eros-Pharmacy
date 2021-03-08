@@ -60,4 +60,4 @@ export const ButtonText = styled.Text`
   text-align: center;
   font-size: ${metrics.big};
   font-weight: bold;
-`;
+`
