@@ -8,6 +8,7 @@ import Home from './src/pages/home'
 import Initial from './src/pages/initial'
 import Profile from './src/pages/profile'
 import EditProfile from './src/pages/edit_profile'
+import CreateMedicine from './src/pages/createMedicine'
 import AddProfile from './src/pages/add_profile'
 import PatientsList from './src/pages/patients_list'
 
@@ -35,10 +36,10 @@ export default function App () {
           component={Profile}
           options={{headerShown: false}}
         />
-        <Stack.Screen 
-          name='EditProfile'
-          component={EditProfile}
-          options={{headerShown: false}} 
+        <Stack.Screen
+          name='CreateMedicine'
+          component={CreateMedicine}
+          options={{headerShown: false}}
         />
         <Stack.Screen 
           name='AddProfile'

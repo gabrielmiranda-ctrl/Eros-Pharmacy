@@ -12,12 +12,19 @@ export default function Route ({navigation}) {
         title='Go to Profile'
         onPress={() => navigation.navigate('Profile')}
       />
-      
+
       <View style={{height: 30}}></View>
 
       <Button
         title='Go to Initial'
         onPress={() => navigation.navigate('Initial')}
+      />
+
+      <View style={{height: 30}}></View>
+
+      <Button
+        title='Go to CreateMedicine'
+        onPress={() => navigation.navigate('CreateMedicine')}
       />
 
       <View style={{height: 30}}></View>

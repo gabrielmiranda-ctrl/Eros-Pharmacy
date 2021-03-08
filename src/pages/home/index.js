@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Button, View, Text} from 'react-native'
+import {Button, View, Text, BackHandler} from 'react-native'
 import {
   Container,
   SearchBar,
@@ -43,14 +43,10 @@ export default function Home ({navigation}) {
         })
         setMedicine(medicine)
       })
-    /* .collection('medicine')
-      .doc('tD9cvXHdgbJMKhb1FqVd')
-      .onSnapshot(documentSnapshot => {
-        setAge(documentSnapshot.data().age)
-        setFirstName(documentSnapshot.data().firstName)
-        setLastName(documentSnapshot.data().lastName)
-        setMedication(documentSnapshot.data().medication)
-      }) */
+  })
+
+  const filterMedicine = medicine.filter(item => {
+    return item.name.toLowerCase().includes(searchTerm.toLowerCase())
   })
 
   return (
@@ -60,7 +56,7 @@ export default function Home ({navigation}) {
           <Icon name='chevron-back-outline' color={colors.gray} size={28} />
           <BackText>Voltar</BackText>
         </Back>
-        <Newpatient>
+        <Newpatient onPress={() => navigation.navigate('CreateMedicine')}>
           <Icon name='add-outline' size={28} color={colors.gray} />
         </Newpatient>
         <Notification>
@@ -72,41 +68,30 @@ export default function Home ({navigation}) {
       </Header>
 
       <CScrollView>
-        {medicine
-          /*  .filter(item => {
-            if (searchTerm == '') {
-              return item
-            } else if (
-              item.name.toUpperCase().includes(searchTerm.toUpperCase())
-            ) {
-              return item
-            }
-          }) */
-          .map((item, key) => {
-            return (
-              <ViewMedicine>
-                <ClassMedicine>
-                  <TextClass>{item.classe}</TextClass>
-                </ClassMedicine>
-                <ImgMedice>
-                  <Img source={require('../../../assets/img/medicine.jpg')} />
-                </ImgMedice>
-                <TextMedicine>
-                  <NameMedicine>
-                    <Text>{item.name}</Text>
-                  </NameMedicine>
-                  <DescriptionMedicine>
-                    <Text>{item.description}</Text>
-                  </DescriptionMedicine>
-                  <AmountMedicine>
-                    <Text>{item.amount}</Text>
-                  </AmountMedicine>
-                </TextMedicine>
-              </ViewMedicine>
-            )
-          })}
+        {filterMedicine.map((item, key) => {
+          return (
+            <ViewMedicine key={key}>
+              <ClassMedicine>
+                <TextClass>{item.classe}</TextClass>
+              </ClassMedicine>
+              <ImgMedice>
+                <Img source={require('../../../assets/img/medicine.jpg')} />
+              </ImgMedice>
+              <TextMedicine>
+                <NameMedicine>
+                  <Text>{item.name}</Text>
+                </NameMedicine>
+                <DescriptionMedicine>
+                  <Text>{item.description}</Text>
+                </DescriptionMedicine>
+                <AmountMedicine>
+                  <Text>{item.amount}</Text>
+                </AmountMedicine>
+              </TextMedicine>
+            </ViewMedicine>
+          )
+        })}
       </CScrollView>
-
       <SearchBar>
         <CInput>
           <Icon name='md-search-outline' size={28} color={colors.white} />
@@ -114,9 +99,7 @@ export default function Home ({navigation}) {
             type='text'
             placeholderTextColor='#fff'
             placeholder='Pesquise'
-            onChange={event => {
-              setSearchTerm(event.target.value)
-            }}
+            onChangeText={text => setSearchTerm(text)}
           />
         </CInput>
         <ButtonSend>

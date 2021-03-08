@@ -6,6 +6,11 @@ import metrics from '../../styled/metrics'
 export const Container = styled.View`
   flex: 1;
 `
+
+export const ViewModal = styled.View`
+  background: ${colors.white};
+  width: 70%;
+`;
 export const Header = styled.View`
   padding: 0 20px;
   background: #fff;
@@ -25,7 +30,7 @@ export const BackText = styled.Text`
   font-size: ${metrics.regular};
 `
 
-export const Newpatient = styled.View`
+export const Newpatient = styled.TouchableOpacity`
   align-items: flex-end;
   padding: 10px 0;
   width: 15%;
@@ -57,7 +62,7 @@ export const ViewMedicine = styled.TouchableOpacity`
   background: #fff;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  margin: 2px 8px;
+  margin: 5px;
   border-bottom-width: 1px;
   padding: 20px;
   border-bottom-color: rgba(142, 153, 175, 0.2);
