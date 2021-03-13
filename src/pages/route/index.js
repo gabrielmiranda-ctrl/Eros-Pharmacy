@@ -9,13 +9,6 @@ export default function Route ({navigation}) {
       <View style={{height: 30}}></View>
 
       <Button
-        title='Go to Profile'
-        onPress={() => navigation.navigate('Profile')}
-      />
-
-      <View style={{height: 30}}></View>
-
-      <Button
         title='Go to Initial'
         onPress={() => navigation.navigate('Initial')}
       />

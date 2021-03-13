@@ -38,7 +38,6 @@ export default function AddProfile({ navigation }) {
   const [cpf, setCPF] = useState('');
   const [rg, setRG] = useState('');
   const [notes, setNotes] = useState('');
-
   const [modalVisible1, setModalVisible1] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
@@ -102,6 +101,13 @@ export default function AddProfile({ navigation }) {
           setModalVisible2(true);
           console.log(error);
         });
+
+      setBirthDate('');
+      setFirstName('');
+      setLastName('');
+      setCPF('');
+      setRG('');
+      setNotes('');
     }
   }
 

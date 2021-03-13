@@ -31,6 +31,7 @@ import { styles } from './styles';
 
 export default function EditProfile({ navigation, route }) {
 
+  const [id, setId] = useState(route.params?.id);
   const [birthDate, setBirthDate] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -85,7 +86,7 @@ export default function EditProfile({ navigation, route }) {
       const maskLastName = normalizeLastName.replace(/[&\/\\#,@0123456789+()$~%.'":*?<>{}]/g, '');
 
       // Função que atualiza os dados do paciente no Firestore.
-      firestore().collection('patients').doc('ATiPdBCapQhkPpSJOpQ9').update({
+      firestore().collection('patients').doc(id).update({
         birthDate: birthDate,
         firstName: maskFirstName,
         lastName: maskLastName,
@@ -221,7 +222,8 @@ export default function EditProfile({ navigation, route }) {
           <RNModal
             isVisible={modalVisible1}
             animationIn='zoomIn'
-            animationOut='zoomOut'>
+            animationOut='zoomOut'
+          >
             <ModalView>
               <Row>
                 <Icon3 name='error-outline' color={colors.red} size={22} style={styles.modalIcon} />
@@ -239,15 +241,14 @@ export default function EditProfile({ navigation, route }) {
           <RNModal
             isVisible={modalVisible2}
             animationIn='zoomIn'
-            animationOut='zoomOut'>
+            animationOut='zoomOut'
+          >
             <ModalView>
               <Row>
                 <Icon3 name='error-outline' color={colors.red} size={22} style={styles.modalIcon} />
                 <ModalTitle>Ops!</ModalTitle>
               </Row>
-              <ModalSubtitle>
-                Ocorreu um erro ao atualizar os dados.
-              </ModalSubtitle>
+              <ModalSubtitle>Ocorreu um erro ao atualizar os dados.</ModalSubtitle>
               <Buttons>
                 <OkButton onPress={() => setModalVisible2(false)}>
                   <OkButtonText>Ok</OkButtonText>
@@ -259,7 +260,8 @@ export default function EditProfile({ navigation, route }) {
           <RNModal
             isVisible={modalVisible3}
             animationIn='zoomIn'
-            animationOut='zoomOut'>
+            animationOut='zoomOut'
+          >
             <ModalView>
               <Row>
                 <Icon2 name='check' color={colors.green} size={22} style={styles.modalIcon} />
