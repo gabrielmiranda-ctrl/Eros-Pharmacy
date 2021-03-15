@@ -47,16 +47,44 @@ export const Profile = styled.View`
   padding: 10px 0;
   width: 15%;
 `
+export const Main = styled.View`
+  flex: 1;
+  background-color: ${colors.lightGray};
+  align-items: center;
+  justify-content: center;
+`
+/* Select Seach Item Classe */
+export const SeachScrollView = styled.ScrollView`
+  z-index: 9999999999;
+  display: flex;
+  padding: 10px 0;
+`;
 
+export const ItemSeach = styled.TouchableOpacity`
+  margin: 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.green};
+  height: 30px;
+  padding: 10px;
+  border-radius: 8px;
+`;
+
+export const ItemText = styled.Text`
+  color: ${colors.white};
+  font-size: ${metrics.small};
+`;
+
+/* Result Seach Itens */
 export const CScrollView = styled.ScrollView``
 
 export const MedicineScroll = styled.View`
-  z-index: 999;
   padding: 5px 0 25px 0;
   background: #ebf2fa;
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
-  margin-bottom: 120px;
+  margin-bottom: 135px !important;
 `
 
 export const ViewMedicine = styled.TouchableOpacity`
@@ -69,7 +97,11 @@ export const ViewMedicine = styled.TouchableOpacity`
   padding: 20px;
   border-bottom-color: rgba(142, 153, 175, 0.2);
 `
-export const ImgMedice = styled.View``
+export const ImgMedice = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 export const Img = styled.Image`
   width: 120px;
@@ -80,6 +112,7 @@ export const Img = styled.Image`
 `
 
 export const TextMedicine = styled.View`
+  display: flex;
   justify-content: center;
   width: 70%;
   padding: 25px 20px 10px 20px;
@@ -115,6 +148,23 @@ export const AmountMedicine = styled.Text`
   font-size: ${metrics.small};
   padding: 0 0 5px 0;
   color: ${colors.green};
+`
+/* Search Bar */
+export const SeachBarRadius = styled.View`
+  position: absolute;
+  z-index: 99999;
+  left: 0;
+  right: 0;
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+  bottom: 80px;
+  height: 50px;
+  padding-top: 40px;
+  padding-left: 30px;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  background: ${colors.lightGray};
 `
 
 export const SearchBar = styled.View`

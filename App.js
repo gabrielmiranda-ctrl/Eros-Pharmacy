@@ -30,7 +30,11 @@ export default function App () {
           component={Home}
           options={{headerShown: false}}
         />
-        <Stack.Screen name='Route' component={Route} />
+        <Stack.Screen
+          name='Route'
+          component={Route}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name='Profile'
           component={Profile}
@@ -46,15 +50,15 @@ export default function App () {
           component={CreateMedicine}
           options={{headerShown: false}}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name='AddProfile'
           component={AddProfile}
-          options={{headerShown: false}} 
+          options={{headerShown: false}}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name='PatientsList'
           component={PatientsList}
-          options={{headerShown: false}} 
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

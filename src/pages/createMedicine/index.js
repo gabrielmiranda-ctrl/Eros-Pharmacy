@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+
 import {
   Container,
   Header,
@@ -11,10 +12,6 @@ import {
   CTextInput,
   FieldSet,
   Label,
-  TextLabel,
-  CTouchableOpacity,
-  RTouchableOpacity,
-  TextTouch,
   ModalTitle,
   ModalSubtitle,
   ModalView,
@@ -36,6 +33,7 @@ import Icon2 from 'react-native-vector-icons/Feather'
 import Icon3 from 'react-native-vector-icons/MaterialIcons'
 
 export default function CreateMedicine ({navigation}) {
+  const [id, setID] = useState(null)
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [classe, setClasse] = useState('')
@@ -46,27 +44,54 @@ export default function CreateMedicine ({navigation}) {
   const [modalVisible1, setModalVisible1] = useState(false)
   const [modalVisible2, setModalVisible2] = useState(false)
 
-  async function updateMedicine () {
-    firestore()
-      .collection('medicine')
-      .add({
-        name: name,
-        description: description,
-        classe: classe,
-        dosage: dosage,
-        measure: measure,
-        amount: amount,
-      })
-      .then(() => {
-        setModalVisible1(true)
-      })
-      .catch(error => {
-        setModalVisible2(true)
-        console.log(error)
-      })
+  // Função que verifica se os campos foram preenchidos corretamente.
+  function updateMedicine () {
+    if (
+      name === '' ||
+      description === '' ||
+      classe === '' ||
+      dosage === '' ||
+      amount === '' ||
+      measure === ''
+    ) {
+      setModalVisible2(true)
+    } else {
+      // Criar ID do medicamento.
+      var length = 20
+      var id = ''
+      var characters =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+      var charactersLength = characters.length
+      for (var i = 0; i < length; i++) {
+        id += characters.charAt(Math.floor(Math.random() * charactersLength))
+      }
 
-    navigation.navigate('Home')
+      firestore()
+        .collection('medicine')
+        .doc(id)
+        .set({
+          id: id,
+          name: name,
+          description: description,
+          classe: classe,
+          dosage: dosage,
+          measure: measure,
+          amount: amount,
+          createdAt: new Date(),
+        })
+        
+
+      setName('')
+      setDescription('')
+      setClasse('')
+      setDosage('')
+      setMeasure('')
+      setAmount('')
+      setModalVisible1(true)
+
+    }
   }
+
   return (
     <Container>
       <Header>
@@ -99,7 +124,7 @@ export default function CreateMedicine ({navigation}) {
           </Row>
           <ModalSubtitle>Medicamento cadastrado com sucesso!</ModalSubtitle>
           <Buttons>
-            <OkButtonSuccess onPress={() => setModalVisible1(false)}>
+            <OkButtonSuccess onPress={() => navigation.navigate('Home')}>
               <OkButtonText>Ok</OkButtonText>
             </OkButtonSuccess>
           </Buttons>
@@ -132,54 +157,69 @@ export default function CreateMedicine ({navigation}) {
       </RNModal>
       <ScrollView>
         <ViewInputs>
-          <FieldSet>
-            <Label>Nome</Label>
-            <CTextInput
-              autoCorrect={false}
-              onChangeText={name => setName(name)}
-            />
-          </FieldSet>
+          <CTextInput
+            label='Nome'
+            mode='outlined'
+            autoCorrect={false}
+            maxLength={20}
+            autoCorrect={false}
+            autoCorrect={false}
+            onChangeText={name => setName(name)}
+            theme={{colors: {primary: colors.green, text: colors.black}}}
+          />
 
-          <FieldSet>
-            <Label>Descrição</Label>
-            <CTextInput
-              autoCorrect={false}
-              maxLength={50}
-              onChangeText={description => setDescription(description)}
-            />
-          </FieldSet>
+          <CTextInput
+            label='Descrição'
+            mode='outlined'
+            autoCorrect={false}
+            maxLength={20}
+            autoCorrect={false}
+            autoCorrect={false}
+            maxLength={50}
+            onChangeText={description => setDescription(description)}
+            theme={{colors: {primary: colors.green, text: colors.black}}}
+          />
 
-          <FieldSet>
-            <Label>Dosagem</Label>
-            <CTextInput
-              autoCorrect={false}
-              onChangeText={dosage => setDosage(dosage)}
-            />
-          </FieldSet>
+          <CTextInput
+            autoCorrect={false}
+            label='Dosagem'
+            mode='outlined'
+            maxLength={20}
+            autoCorrect={false}
+            keyboardType='numeric'
+            onChangeText={dosage => setDosage(dosage)}
+            theme={{colors: {primary: colors.green, text: colors.black}}}
+          />
 
-          <FieldSet>
-            <Label>Medida</Label>
-            <CTextInput
-              autoCorrect={false}
-              onChangeText={measure => setMeasure(measure)}
-            />
-          </FieldSet>
+          <CTextInput
+            label='Medida'
+            mode='outlined'
+            autoCorrect={false}
+            maxLength={20}
+            autoCorrect={false}
+            onChangeText={measure => setMeasure(measure)}
+            theme={{colors: {primary: colors.green, text: colors.black}}}
+          />
 
-          <FieldSet>
-            <Label>Classe</Label>
-            <CTextInput
-              autoCorrect={false}
-              onChangeText={classe => setClasse(classe)}
-            />
-          </FieldSet>
+          <CTextInput
+            label='Classe'
+            mode='outlined'
+            autoCorrect={false}
+            maxLength={20}
+            autoCorrect={false}
+            onChangeText={classe => setClasse(classe)}
+            theme={{colors: {primary: colors.green, text: colors.black}}}
+          />
 
-          <FieldSet>
-            <Label>Quantidade</Label>
-            <CTextInput
-              autoCorrect={false}
-              onChangeText={amount => setAmount(amount)}
-            />
-          </FieldSet>
+          <CTextInput
+            label='Quantidade'
+            mode='outlined'
+            autoCorrect={false}
+            maxLength={10}
+            keyboardType='numeric'
+            onChangeText={amount => setAmount(amount)}
+            theme={{colors: {primary: colors.green, text: colors.black}}}
+          />
         </ViewInputs>
       </ScrollView>
     </Container>

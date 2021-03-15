@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import colors from '../../styled/colors'
 import metrics from '../../styled/metrics'
+import { TextInput } from 'react-native-paper';
 
 export const Container = styled.View`
   flex: 1;
@@ -96,9 +97,9 @@ export const ViewInputs = styled.View`
   border-radius: 20px;
 `
 
-export const CTextInput = styled.TextInput`
-  font-size: 16px;
-  color: ${colors.black};
+export const CTextInput = styled(TextInput)`
+  margin-top: 30px;
+  width: 90%;
 `
 
 export const FieldSet = styled.View`

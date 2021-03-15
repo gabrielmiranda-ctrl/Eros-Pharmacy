@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Button, View, Text, BackHandler} from 'react-native'
+import {Text, ActivityIndicator, RefreshControl, ScrollView} from 'react-native'
 import {
   Container,
   SearchBar,
@@ -22,7 +22,12 @@ import {
   BackText,
   ClassMedicine,
   TextClass,
+  Main,
+  SeachBarRadius,
   MedicineScroll,
+  SeachScrollView,
+  ItemSeach,
+  ItemText,
 } from './styles'
 import colors from '../../styled/colors'
 import firestore from '@react-native-firebase/firestore'
@@ -30,12 +35,16 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 export default function Home ({navigation}) {
   const [searchTerm, setSearchTerm] = useState('')
-  const [medicine, setMedicine] = useState([])
+  const [refreshing, setRefreshing] = useState(false)
+  const [medicine, setMedicine] = useState(['teste'])
+  const [selectSeach, setSelectSeach] = useState('')
 
-  useEffect(() => {
+  function onRefreshClear () {
+    setRefreshing(true)
     firestore()
       .collection('medicine')
-      .onSnapshot(querySnapshot => {
+      .get()
+      .then(querySnapshot => {
         const medicine = []
         querySnapshot.forEach(documentSnapshot => {
           medicine.push({
@@ -44,7 +53,38 @@ export default function Home ({navigation}) {
         })
         setMedicine(medicine)
       })
-  })
+    setRefreshing(false)
+  }
+
+  function onRefresh () {
+    setRefreshing(true)
+    firestore()
+      .collection('medicine')
+      .where('classe', '==', selectSeach)
+      .get()
+      .then(querySnapshot => {
+        const medicine = []
+        querySnapshot.forEach(documentSnapshot => {
+          medicine.push({
+            ...documentSnapshot.data(),
+          })
+        })
+        setMedicine(medicine)
+      })
+    setRefreshing(false)
+  }
+
+  useEffect(() => {
+    onRefresh()
+  }, [selectSeach])
+
+  if (medicine == 'teste') {
+    return (
+      <Main>
+        <ActivityIndicator size='large' color={colors.green} />
+      </Main>
+    )
+  }
 
   const filterMedicine = medicine.filter(item => {
     return item.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -67,8 +107,35 @@ export default function Home ({navigation}) {
           <Icon name='person-outline' size={28} color={colors.gray} />
         </Profile>
       </Header>
+
       <MedicineScroll>
-        <CScrollView>
+        <CScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefreshClear}
+            />
+          }>
+          <SeachScrollView horizontal={true}>
+            <ItemSeach onPress={() => setSelectSeach('Analgésico')}>
+              <ItemText>Analgésicos</ItemText>
+            </ItemSeach>
+            <ItemSeach onPress={() => setSelectSeach('Antibióticos')}>
+              <ItemText>Antibióticos</ItemText>
+            </ItemSeach>
+            <ItemSeach onPress={() => setSelectSeach('Anticoagulantes')}>
+              <ItemText>Anticoagulantes</ItemText>
+            </ItemSeach>
+            <ItemSeach onPress={() => setSelectSeach('Antidepressivos')}>
+              <ItemText>Antidepressivos</ItemText>
+            </ItemSeach>
+            <ItemSeach onPress={() => setSelectSeach('Anticancerosos')}>
+              <ItemText>Anticancerosos</ItemText>
+            </ItemSeach>
+            <ItemSeach onPress={() => setSelectSeach('Antiepilépticos')}>
+              <ItemText>Antiepilépticos</ItemText>
+            </ItemSeach>
+          </SeachScrollView>
           {filterMedicine.map((item, key) => {
             return (
               <ViewMedicine key={key}>
@@ -89,7 +156,9 @@ export default function Home ({navigation}) {
                     <Text>quant: {item.amount}</Text>
                   </AmountMedicine>
                   <AmountMedicine>
-                    <Text>{item.dosage} {item.measure}</Text>
+                    <Text>
+                      {item.dosage} {item.measure}
+                    </Text>
                   </AmountMedicine>
                 </TextMedicine>
               </ViewMedicine>
@@ -97,6 +166,7 @@ export default function Home ({navigation}) {
           })}
         </CScrollView>
       </MedicineScroll>
+      <SeachBarRadius></SeachBarRadius>
       <SearchBar>
         <CInput>
           <Icon name='md-search-outline' size={28} color={colors.white} />

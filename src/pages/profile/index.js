@@ -118,7 +118,8 @@ export default function Profile({ navigation, route }) {
               <Icon1 name='ios-camera-outline' size={20} color={colors.white} />
             </Edit>
           </UserAvatar>
-
+          
+          {/* dados */}
           <Name>{name}</Name>
 
           <Info>
@@ -155,6 +156,8 @@ export default function Profile({ navigation, route }) {
             }
           </Info>
 
+
+          {/* Modais */}
           <RNModal
             isVisible={modalVisible1}
             animationIn='zoomIn'
